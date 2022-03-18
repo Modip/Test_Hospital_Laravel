@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CustomAuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,28 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get("/user", [UserController::class, "index"]);
 
 Route::get('/home',[UserController::class,'redirect']);
+
+Route::post("/create-personne", [PersonneController::class, "addOrder"])->name("create-order");
+
+Route::post("/addOrder", [orderController::class, "addOrder"])->name("create-order");
+
+Route::get("/registration", [CustomAuthController::class, "registration"]);
+Route::get("/login", [CustomAuthController::class, "login"]);
+
+Route::post("/register-user", [CustomAuthController::class, "registerUser"])->name("register-user");
+Route::post("/login-user", [CustomAuthController::class, "loginUser"])->name("login-user");
