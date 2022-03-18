@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\Department;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -40,4 +41,5 @@ class UserController extends Controller
             return redirect()->back();
         }
     }
+
 }

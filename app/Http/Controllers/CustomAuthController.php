@@ -21,9 +21,12 @@ class CustomAuthController extends Controller
     }
 
     public function registerUser(Request $request){
+
         $request->validate([
             'prenom'=>'required',
             'nom'=>'required',
+            'phone'=>'required',
+            'adress'=>'required',
             'email'=>'required|email|unique:users',
             'password'=>'required|min:5|max:12',
 
@@ -31,8 +34,13 @@ class CustomAuthController extends Controller
         $user = new User();
         $user->prenom = $request->prenom;
         $user->nom = $request->nom;
+        $user->phone = $request->phone;
+        $user->adress = $request->adress;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+
+        error_log($user);
+
         
         $res = $user->save();
 

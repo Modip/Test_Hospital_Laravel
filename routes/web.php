@@ -25,17 +25,16 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 Route::get("/user", [UserController::class, "index"]);
 
-Route::get('/home',[UserController::class,'redirect']);
+// Route::get('/home',[UserController::class,'redirect']);
 
-Route::post("/create-personne", [PersonneController::class, "addOrder"])->name("create-order");
 
-Route::post("/addOrder", [orderController::class, "addOrder"])->name("create-order");
+Route::post("/create-order", [OrderController::class, "addOrder"])->name("create-order");
 
 Route::get("/registration", [CustomAuthController::class, "registration"]);
 Route::get("/login", [CustomAuthController::class, "login"]);

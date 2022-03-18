@@ -46,6 +46,20 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputFirstName" type="text" name="phone"  placeholder="Enter your first name" />
+                                                        <label for="inputFirstName">Phone</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input class="form-control" id="inputLastName" type="text" name="adress" placeholder="Enter your last name" />
+                                                        <label for="inputLastName">Adress</label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="email" name="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>

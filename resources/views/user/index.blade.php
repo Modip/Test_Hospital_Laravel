@@ -18,20 +18,20 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Ciasse</h3></div>
                                     <div class="card-body">
                                         <form action="{{route('create-order')}}" method="post">
                                         @csrf
-                                            @if(Session::has('success'))                                        
+                                        @if(Session::has('success'))                                        
                                             <div class="alert alert-success">
                                                 {{Session::get('success')}}
                                             </div>
-                                            @endif
-                                            @if(Session::has('fail'))                                       
+                                        @endif
+                                        @if(Session::has('fail'))                                       
                                             <div class="alert alert-success">
-                                                {{Session::get('fail')}}
+                                               {{Session::get('fail')}}
                                             </div>
-                                            @endif
+                                         @endif
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
@@ -41,8 +41,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text" name="nom" placeholder="Enter your last name" />
-                                                        <label for="inputLastName">Nom</label>
+                                                        <input class="form-control" id="inputLastName" type="text"  name="nom" placeholder="Enter your last name" />
+                                                        <label for="inputLastName" >Nom</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -64,19 +64,18 @@
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <label for="inputFirstName">Department</label>
-                                                        <select name="fonction_id" for="form-control">
+                                                        <select name="department_id" for="form-control">
                                                             <option value="">Veillez choisir</option>
                                                             @foreach ($departments as $department)
                                                             <option value="{{ $department->id }}">{{ $department->nom}}</option>
                                                             @endforeach
                                                         </select>
-                                                    
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
                                                     <label for="form-control">Payment</label>
-                                                    <select name="fonction_id" for="form-control">
+                                                    <select name="payment_id" for="form-control">
                                                         <option value="">Veillez choisir</option>
                                                         @foreach ($payments as $payment)
                                                         <option value="{{ $payment->id }}">{{ $payment->nom}}</option>
@@ -95,9 +94,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login">Have an account? Go to login</a></div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
