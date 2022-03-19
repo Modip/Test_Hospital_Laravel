@@ -9,6 +9,8 @@ use App\Models\Payment;
 use App\Models\Department;
 use App\Models\Order;
 
+use DB;
+
 class UserController extends Controller
 {
     //
@@ -22,24 +24,27 @@ class UserController extends Controller
     );
 
     }
-    public function redirect()
-    {if(Auth::id())
-        {
-            if(Auth::user()->usertype=='0')
-            {
-                $payments = Payment::orderBy("nom", "asc")->get();
-                $departments = Department::orderBy("nom", "asc")->get();
-                return view('user.homeUser',compact("payments"),compact("departments"));
-            }
-            else
-            {
-                return view('admin.home');
-            }
-        }
-        else
-        {
-            return redirect()->back();
-        }
+
+    public function homeManager()
+    {
+        $orders = Order::orderBy("nom", "asc")->get();
+        return view('manager.homeManager', compact("orders"));
+    }
+
+    public function homeAdmin()
+    {
+        $orders = Order::orderBy("nom", "asc")->get();
+        return view('admin.homeAdmin', compact("orders"));
+    }
+
+    public function editOrder($id)
+    {
+        $payments = Payment::all();
+        $departments = Department::all();
+        $order = DB::table('orders')->where('id', $id)->first();
+
+        return view('admin.editOrder', compact('order', 'payments', 'departments'));
+
     }
 
 }

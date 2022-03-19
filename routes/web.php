@@ -30,11 +30,24 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::get("/user", [UserController::class, "index"]);
+Route::get("/manager", [UserController::class, "homeManager"])->name("homeManager");
+Route::get("/admin", [UserController::class, "homeAdmin"])->name("homeAdmin");
+Route::get("/admin/edit-order/{id}", [UserController::class, "editOrder"])->name("order.edit");
 
-// Route::get('/home',[UserController::class,'redirect']);
+
 
 
 Route::post("/create-order", [OrderController::class, "addOrder"])->name("create-order");
+Route::get("/edit-order/{id}", [OrderController::class, "editOrder"])->name("order.edit");
+Route::get("/order/{id}", [OrderController::class, "update"])->name("update.order");
+Route::post("/update-order", [OrderController::class, "updateOrder"])->name("update-order");
+
+Route::get("/delete-order/{id}", [OrderController::class, "deleteOrder"])->name("delete.order");
+
+
+
+
+
 
 Route::get("/registration", [CustomAuthController::class, "registration"]);
 Route::get("/login", [CustomAuthController::class, "login"]);

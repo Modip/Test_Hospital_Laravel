@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\Department;
+use App\Models\Order;
+
 use Hash;
 use UserController;
 
@@ -63,7 +67,31 @@ class CustomAuthController extends Controller
 
         if($user){
             if(Hash::check($request->password, $user->password)){
-                return redirect('user');
+                // return redirect('user');
+               
+                    if($user->usertype=='0')
+                    {
+                        $payments = Payment::orderBy("nom", "asc")->get();
+                        $departments = Department::orderBy("nom", "asc")->get();
+                        return view('user.index',compact("payments", "departments"));
+                    }
+                    else if($user->usertype=='1')
+                    {
+                        $payments = Payment::orderBy("nom", "asc")->get();
+                        $departments = Department::orderBy("nom", "asc")->get();
+                        $orders = Order::orderBy("nom", "asc")->get();
+                        return view('manager.homeManager',compact("payments", "departments", "orders"));
+                    } 
+                    else if($user->usertype=='2')
+                    {
+                        $payments = Payment::orderBy("nom", "asc")->get();
+                        $departments = Department::orderBy("nom", "asc")->get();
+                        $orders = Order::orderBy("nom", "asc")->get();                    
+                        return view('admin.homeAdmin',compact("payments", "departments", "orders"));
+                    
+                    }
+               
+               
             }else {
                 return back()->with('fail', 'Erreur email et/ou mot de passe invalid');
             }
