@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Department;
 use App\Models\Payment;
+use App\Models\Personne;
+use App\Models\Om;
+
 use DB;
 
 
@@ -14,6 +17,10 @@ class OrderController extends Controller
 {
     //
     public function addOrder(Request $request){
+
+        $payments = Payment::orderBy("nom", "asc")->get();
+        $departments = Department::orderBy("nom", "asc")->get();
+
         $request->validate([
             'prenom'=>'required',
             'nom'=>'required',
@@ -31,17 +38,53 @@ class OrderController extends Controller
         $order->department_id=$request->department_id;
         $order->payment_id=$request->payment_id;
         $order->number=rand(0000,9999).date('mdYhis');
-        
-        error_log($order);
 
-        $res = $order->save();
+        $amount=$request->montant;
+        $pId= $request->payment_id;
+        $client = Om::where('phone', '=', $request->phone)->first();
+        $solde=$client->solde;
+        // $newSolde=$solde-$amount;
+        // error_log($newSolde);
 
-            if($res){
+        if($pId==1){
+            $newSolde=$solde-$amount;
+            // 
+            if($newSolde>=0){
+                // error_log($newSolde);
+                $client->solde= $newSolde;
+                $client->save();
+                $res = $order->save();
                 return back()->with('success', 'Paiement bien reussi');
 
-            }else {
+            }else{
                 return back()->with('fail', 'Erreur');
+            }
         }
+
+
+
+
+        //error_log($personne);
+        // error_log($pId);
+        // if($pId==1){
+        //     // $client = Om::where('phone', '=', $request->phone)->first();
+            
+
+        // }
+   
+
+        // $res = $order->save();
+
+        // if($res){
+            // return view('user.index',compact("payments", "departments"))->with('success', 'Paiement bien reussi');
+
+        //     return back()->with('success', 'Paiement bien reussi');
+
+        // }else {
+
+        //     return back()->with('fail', 'Erreur');
+        // }
+        
     }
 
     public function editOrder($id)
@@ -81,6 +124,13 @@ class OrderController extends Controller
 
         return back()->with('delete_order', "Payement bien supprimer");
           
-        
+    }
+
+    public function UpdateSomme (){
+
+        $personnes = Personne::where('phone', $phone->phone)->get();
+       // $operations = Operation::where('wallet_id', $wallet->id)->get();
+
+        error_log($personnes);
     }
 }

@@ -24,6 +24,10 @@ class CustomAuthController extends Controller
         return view("auth.registration");
     }
 
+    public function index(){
+        return view("user.index");
+    }
+
     public function registerUser(Request $request){
 
         $request->validate([
