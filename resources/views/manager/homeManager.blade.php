@@ -47,11 +47,9 @@
                                             <td>{{ $order->prenom}}</td>
                                             <td>{{ $order->nom}}</td>
                                             <td>{{ $order->Department->nom}}</td>
-                                        
                                             <td>{{ $order->Payment->nom}}</td>
-                                        
                                             <td>
-                                            <a href="/admin/edit-order/{{$order->id}}" class="btn btn-info">Modifier</a>
+                                            <a href="/manager/edit-order/{{$order->id}}" class="btn btn-info">Modifier</a>
                                             </td>
                                             
                                         @endforeach

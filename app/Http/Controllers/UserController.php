@@ -47,4 +47,14 @@ class UserController extends Controller
 
     }
 
+    public function managerEditOrder($id)
+    {
+        $payments = Payment::all();
+        $departments = Department::all();
+        $order = DB::table('orders')->where('id', $id)->first();
+
+        return view('manager.editOrder', compact('order', 'payments', 'departments'));
+
+    }
+
 }

@@ -41,21 +41,42 @@ class OrderController extends Controller
 
         $amount=$request->montant;
         $pId= $request->payment_id;
-        $client = Om::where('phone', '=', $request->phone)->first();
-        $solde=$client->solde;
-        // $newSolde=$solde-$amount;
-        // error_log($newSolde);
 
         if($pId==1){
+            $clientOm = Om::where('phone', '=', $request->phone)->first();
+            $solde=$clientOm->solde;
+            $newSolde=$solde-$amount;
+            
+            if($newSolde>=0){
+                // error_log($newSolde);
+                $clientOm->solde= $newSolde;
+                $clientOm->save();
+                $res = $order->save();
+                return back()->with('success', 'Paiement bien reussi');
+
+            }else{
+                return back()->with('message', 'Solde insuffisant');
+            }
+        }else if($pId==2){
+
+            $clientWave = Wave::where('phone', '=', $request->phone)->first();
+            $solde=$client->solde;
             $newSolde=$solde-$amount;
             // 
             if($newSolde>=0){
                 // error_log($newSolde);
-                $client->solde= $newSolde;
-                $client->save();
+                $clientWave->solde= $newSolde;
+                $clientWave->save();
                 $res = $order->save();
                 return back()->with('success', 'Paiement bien reussi');
 
+            }else{
+                return back()->with('fail', 'Erreur');
+            }
+        }else{
+            $res = $order->save();
+            if ($res) {
+            return back()->with('success', 'Paiement bien reussi');
             }else{
                 return back()->with('fail', 'Erreur');
             }

@@ -71,27 +71,27 @@ class CustomAuthController extends Controller
 
         if($user){
             if(Hash::check($request->password, $user->password)){
-                // return redirect('user');
                
                     if($user->usertype=='0')
                     {
                         $payments = Payment::orderBy("nom", "asc")->get();
                         $departments = Department::orderBy("nom", "asc")->get();
-                        return view('user.index',compact("payments", "departments"));
+                        return redirect(route('index',compact("payments", "departments")));
                     }
                     else if($user->usertype=='1')
                     {
                         $payments = Payment::orderBy("nom", "asc")->get();
                         $departments = Department::orderBy("nom", "asc")->get();
                         $orders = Order::orderBy("nom", "asc")->get();
-                        return view('manager.homeManager',compact("payments", "departments", "orders"));
+                        return redirect(route('homeManager',compact("payments", "departments")));
+
                     } 
                     else if($user->usertype=='2')
                     {
                         $payments = Payment::orderBy("nom", "asc")->get();
                         $departments = Department::orderBy("nom", "asc")->get();
                         $orders = Order::orderBy("nom", "asc")->get();                    
-                        return view('admin.homeAdmin',compact("payments", "departments", "orders"));
+                        return redirect(route('homeAdmin',compact("payments", "departments", "orders")));
                     
                     }
                

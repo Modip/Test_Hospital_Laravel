@@ -29,11 +29,12 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->name('dashboard');
 
-Route::get("/user", [UserController::class, "index"]);
+Route::get("/user", [UserController::class, "index"])->name('index');
 Route::get("/manager", [UserController::class, "homeManager"])->name("homeManager");
 Route::get("/admin", [UserController::class, "homeAdmin"])->name("homeAdmin");
 Route::get("/admin/edit-order/{id}", [UserController::class, "editOrder"])->name("order.edit");
 
+Route::get("/manager/edit-order/{id}", [UserController::class, "managerEditOrder"])->name("order.edit");
 
 
 

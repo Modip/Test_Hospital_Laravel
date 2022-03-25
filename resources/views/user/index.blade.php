@@ -27,9 +27,9 @@
                                                 {{Session::get('success')}}
                                             </div>
                                         @endif
-                                        @if(Session::has('fail'))                                       
-                                            <div class="alert alert-success">
-                                               {{Session::get('fail')}}
+                                        @if(Session::has('message'))                                       
+                                            <div class="alert alert-danger">
+                                               {{Session::get('message')}}
                                             </div>
                                          @endif
                                             <div class="row mb-3">
@@ -67,7 +67,7 @@
                                                         <select name="department_id" for="form-control">
                                                             <option value="">Veillez choisir</option>
                                                             @foreach ($departments as $department)
-                                                            <option value="{{ $department->id }}">{{ $department->nom}}</option>
+                                                                <option value="{{ $department->id }}">{{ $department->nom}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -78,7 +78,7 @@
                                                     <select name="payment_id" for="form-control">
                                                         <option value="">Veillez choisir</option>
                                                         @foreach ($payments as $payment)
-                                                        <option value="{{ $payment->id }}">{{ $payment->nom}}</option>
+                                                            <option value="{{ $payment->id }}">{{ $payment->nom}}</option>
                                                         @endforeach
                                                     </select>
                                                     
@@ -105,12 +105,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright &copy; Modip 2022</div>
                         </div>
                     </div>
                 </footer>
