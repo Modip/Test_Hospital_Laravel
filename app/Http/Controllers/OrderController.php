@@ -60,30 +60,6 @@ class OrderController extends Controller
                 return back()->with('fail', 'Erreur');
             }
         }
-
-
-
-
-        //error_log($personne);
-        // error_log($pId);
-        // if($pId==1){
-        //     // $client = Om::where('phone', '=', $request->phone)->first();
-            
-
-        // }
-   
-
-        // $res = $order->save();
-
-        // if($res){
-            // return view('user.index',compact("payments", "departments"))->with('success', 'Paiement bien reussi');
-
-        //     return back()->with('success', 'Paiement bien reussi');
-
-        // }else {
-
-        //     return back()->with('fail', 'Erreur');
-        // }
         
     }
 
@@ -129,8 +105,6 @@ class OrderController extends Controller
     public function UpdateSomme (){
 
         $personnes = Personne::where('phone', $phone->phone)->get();
-       // $operations = Operation::where('wallet_id', $wallet->id)->get();
 
-        error_log($personnes);
     }
 }
